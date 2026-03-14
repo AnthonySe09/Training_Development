@@ -53,46 +53,6 @@ public class Induction {
 
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Induction)) return false;
-        Induction that = (Induction) o;
-        return Objects.equals(inductionId, that.inductionId) &&
-                Objects.equals(employeeId, that.employeeId);
-    }
-    // Verificar si la inducción está en curso
-    public boolean isOngoing() {
-        LocalDate today = LocalDate.now();
-        return (startDate != null && endDate != null) &&
-                (today.isEqual(startDate) || today.isAfter(startDate)) &&
-                today.isBefore(endDate) &&
-                "IN_PROGRESS".equalsIgnoreCase(this.status);
-    }
-
-    // Marcar la inducción como completada
-    public void markAsCompleted() {
-        this.status = "COMPLETED";
-    }
-
-    // Cancelar la inducción
-    public void cancel(String reason) {
-        this.status = "CANCELLED";
-        this.remarks = reason;
-    }
-    // Calcular la duración en días
-    public long getDurationInDays() {
-        if (startDate != null && endDate != null) {
-            return java.time.temporal.ChronoUnit.DAYS.between(startDate, endDate);
-        }
-        return 0;
-    }
-
-    // Verificar si la inducción está vencida
-    public boolean isExpired() {
-        return endDate != null && LocalDate.now().isAfter(endDate);
-    }
-
-    @Override
     public int hashCode() {
         return Objects.hash(inductionId, employeeId);
     }
