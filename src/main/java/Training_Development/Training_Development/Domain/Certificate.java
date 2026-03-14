@@ -55,33 +55,6 @@ public class Certificate {
     public void setDocumentUrl(String documentUrl) { this.documentUrl = documentUrl; }
 
 
-    // Validar si el certificado es válido
-    public boolean isValid() {
-        return "VALID".equalsIgnoreCase(this.status) && this.issueDate != null;
-    }
-
-    // Verificar el código de autenticidad
-    public boolean verifyCode(String code) {
-        return this.verificationCode != null && this.verificationCode.equals(code);
-    }
-
-    // Marcar el certificado como revocado
-    public void markAsRevoked() {
-        this.status = "REVOKED";
-    }
-
-    // Renovar el certificado con nueva fecha y código
-    public void renew(LocalDate newIssueDate, String newVerificationCode) {
-        this.issueDate = newIssueDate;
-        this.verificationCode = newVerificationCode;
-        this.status = "VALID";
-    }
-
-    // Obtener enlace de descarga del documento
-    public String getDownloadLink() {
-        return this.documentUrl != null ? this.documentUrl : "No document available";
-    }
-
     // hashCode
     @Override
     public int hashCode() {
